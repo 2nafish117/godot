@@ -47,39 +47,75 @@ TEST_CASE("[SceneTree][Node3D] Test Transform Getters and Setters") {
 	test_node->set_rotation(Vector3(Math::deg_to_rad(30.0), 0, 0));
 	test_node->set_scale(Vector3(1, 1, 1));
 
-	SUBCASE("[Node3D] Test ") {
+	SUBCASE("[Node3D] Test set/get transform") {
+		ClassDB::bind_method(D_METHOD("set_transform", "local"), &Node3D::set_transform);
+		ClassDB::bind_method(D_METHOD("get_transform"), &Node3D::get_transform);
 	}
 
-	ClassDB::bind_method(D_METHOD("set_transform", "local"), &Node3D::set_transform);
-	ClassDB::bind_method(D_METHOD("get_transform"), &Node3D::get_transform);
-	ClassDB::bind_method(D_METHOD("set_position", "position"), &Node3D::set_position);
-	ClassDB::bind_method(D_METHOD("get_position"), &Node3D::get_position);
-	ClassDB::bind_method(D_METHOD("set_rotation", "euler_radians"), &Node3D::set_rotation);
-	ClassDB::bind_method(D_METHOD("get_rotation"), &Node3D::get_rotation);
-	ClassDB::bind_method(D_METHOD("set_rotation_degrees", "euler_degrees"), &Node3D::set_rotation_degrees);
-	ClassDB::bind_method(D_METHOD("get_rotation_degrees"), &Node3D::get_rotation_degrees);
-	ClassDB::bind_method(D_METHOD("set_rotation_order", "order"), &Node3D::set_rotation_order);
-	ClassDB::bind_method(D_METHOD("get_rotation_order"), &Node3D::get_rotation_order);
+	SUBCASE("[Node3D] Test set/get position") {
+		ClassDB::bind_method(D_METHOD("set_position", "position"), &Node3D::set_position);
+		ClassDB::bind_method(D_METHOD("get_position"), &Node3D::get_position);
+	}
 
-	ClassDB::bind_method(D_METHOD("set_rotation_edit_mode", "edit_mode"), &Node3D::set_rotation_edit_mode);
-	ClassDB::bind_method(D_METHOD("get_rotation_edit_mode"), &Node3D::get_rotation_edit_mode);
-	ClassDB::bind_method(D_METHOD("set_scale", "scale"), &Node3D::set_scale);
-	ClassDB::bind_method(D_METHOD("get_scale"), &Node3D::get_scale);
-	ClassDB::bind_method(D_METHOD("set_quaternion", "quaternion"), &Node3D::set_quaternion);
-	ClassDB::bind_method(D_METHOD("get_quaternion"), &Node3D::get_quaternion);
-	ClassDB::bind_method(D_METHOD("set_basis", "basis"), &Node3D::set_basis);
-	ClassDB::bind_method(D_METHOD("get_basis"), &Node3D::get_basis);
+	SUBCASE("[Node3D] Test set/get rotation") {
+		ClassDB::bind_method(D_METHOD("set_rotation", "euler_radians"), &Node3D::set_rotation);
+		ClassDB::bind_method(D_METHOD("get_rotation"), &Node3D::get_rotation);
+	}
 
-	ClassDB::bind_method(D_METHOD("set_global_transform", "global"), &Node3D::set_global_transform);
-	ClassDB::bind_method(D_METHOD("get_global_transform"), &Node3D::get_global_transform);
-	ClassDB::bind_method(D_METHOD("set_global_position", "position"), &Node3D::set_global_position);
-	ClassDB::bind_method(D_METHOD("get_global_position"), &Node3D::get_global_position);
-	ClassDB::bind_method(D_METHOD("set_global_basis", "basis"), &Node3D::set_global_basis);
-	ClassDB::bind_method(D_METHOD("get_global_basis"), &Node3D::get_global_basis);
-	ClassDB::bind_method(D_METHOD("set_global_rotation", "euler_radians"), &Node3D::set_global_rotation);
-	ClassDB::bind_method(D_METHOD("get_global_rotation"), &Node3D::get_global_rotation);
-	ClassDB::bind_method(D_METHOD("set_global_rotation_degrees", "euler_degrees"), &Node3D::set_global_rotation_degrees);
-	ClassDB::bind_method(D_METHOD("get_global_rotation_degrees"), &Node3D::get_global_rotation_degrees);
+	SUBCASE("[Node3D] Test set/get rotation degrees") {
+		ClassDB::bind_method(D_METHOD("set_rotation_degrees", "euler_degrees"), &Node3D::set_rotation_degrees);
+		ClassDB::bind_method(D_METHOD("get_rotation_degrees"), &Node3D::get_rotation_degrees);
+	}
+
+	SUBCASE("[Node3D] Test set/get rotation order") {
+		ClassDB::bind_method(D_METHOD("set_rotation_order", "order"), &Node3D::set_rotation_order);
+		ClassDB::bind_method(D_METHOD("get_rotation_order"), &Node3D::get_rotation_order);
+	}
+
+	SUBCASE("[Node3D] Test set/get rotation edit mode") {
+		ClassDB::bind_method(D_METHOD("set_rotation_edit_mode", "edit_mode"), &Node3D::set_rotation_edit_mode);
+		ClassDB::bind_method(D_METHOD("get_rotation_edit_mode"), &Node3D::get_rotation_edit_mode);
+	}
+
+	SUBCASE("[Node3D] Test set/get scale") {
+		ClassDB::bind_method(D_METHOD("set_scale", "scale"), &Node3D::set_scale);
+		ClassDB::bind_method(D_METHOD("get_scale"), &Node3D::get_scale);
+	}
+
+	SUBCASE("[Node3D] Test set/get quaternion") {
+		ClassDB::bind_method(D_METHOD("set_quaternion", "quaternion"), &Node3D::set_quaternion);
+		ClassDB::bind_method(D_METHOD("get_quaternion"), &Node3D::get_quaternion);
+	}
+
+	SUBCASE("[Node3D] Test set/get basis") {
+		ClassDB::bind_method(D_METHOD("set_basis", "basis"), &Node3D::set_basis);
+		ClassDB::bind_method(D_METHOD("get_basis"), &Node3D::get_basis);
+	}
+
+	SUBCASE("[Node3D] Test set/get global transform") {
+		ClassDB::bind_method(D_METHOD("set_global_transform", "global"), &Node3D::set_global_transform);
+		ClassDB::bind_method(D_METHOD("get_global_transform"), &Node3D::get_global_transform);
+	}
+
+	SUBCASE("[Node3D] Test set/get global position") {
+		ClassDB::bind_method(D_METHOD("set_global_position", "position"), &Node3D::set_global_position);
+		ClassDB::bind_method(D_METHOD("get_global_position"), &Node3D::get_global_position);
+	}
+
+	SUBCASE("[Node3D] Test set/get global basis") {
+		ClassDB::bind_method(D_METHOD("set_global_basis", "basis"), &Node3D::set_global_basis);
+		ClassDB::bind_method(D_METHOD("get_global_basis"), &Node3D::get_global_basis);
+	}
+
+	SUBCASE("[Node3D] Test set/get global rotation") {
+		ClassDB::bind_method(D_METHOD("set_global_rotation", "euler_radians"), &Node3D::set_global_rotation);
+		ClassDB::bind_method(D_METHOD("get_global_rotation"), &Node3D::get_global_rotation);
+	}
+
+	SUBCASE("[Node3D] Test set/get global rotation degrees") {
+		ClassDB::bind_method(D_METHOD("set_global_rotation_degrees", "euler_degrees"), &Node3D::set_global_rotation_degrees);
+		ClassDB::bind_method(D_METHOD("get_global_rotation_degrees"), &Node3D::get_global_rotation_degrees);
+	}
 }
 
 TEST_CASE("[SceneTree][Node3D] Test Utility methods") {
@@ -91,40 +127,53 @@ TEST_CASE("[SceneTree][Node3D] Test Utility methods") {
 	test_node->set_rotation(Vector3(Math::deg_to_rad(30.0), 0, 0));
 	test_node->set_scale(Vector3(1, 1, 1));
 
-	SUBCASE("[Node3D] Test") {
+	SUBCASE("[Node3D] Test get_parent_node_3d") {
 	}
 
-	ClassDB::bind_method(D_METHOD("get_parent_node_3d"), &Node3D::get_parent_node_3d);
-	ClassDB::bind_method(D_METHOD("set_ignore_transform_notification", "enabled"), &Node3D::set_ignore_transform_notification);
-	ClassDB::bind_method(D_METHOD("set_as_top_level", "enable"), &Node3D::set_as_top_level);
-	ClassDB::bind_method(D_METHOD("is_set_as_top_level"), &Node3D::is_set_as_top_level);
-	ClassDB::bind_method(D_METHOD("set_disable_scale", "disable"), &Node3D::set_disable_scale);
-	ClassDB::bind_method(D_METHOD("is_scale_disabled"), &Node3D::is_scale_disabled);
-	ClassDB::bind_method(D_METHOD("get_world_3d"), &Node3D::get_world_3d);
+	SUBCASE("[Node3D] Test set_ignore_transform_notification") {
+	}
 
-	ClassDB::bind_method(D_METHOD("force_update_transform"), &Node3D::force_update_transform);
+	SUBCASE("[Node3D] Test set_as_top_level") {
+	}
 
-	ClassDB::bind_method(D_METHOD("set_visibility_parent", "path"), &Node3D::set_visibility_parent);
-	ClassDB::bind_method(D_METHOD("get_visibility_parent"), &Node3D::get_visibility_parent);
+	SUBCASE("[Node3D] Test set_disable_scale") {
+	}
 
-	ClassDB::bind_method(D_METHOD("update_gizmos"), &Node3D::update_gizmos);
-	ClassDB::bind_method(D_METHOD("add_gizmo", "gizmo"), &Node3D::add_gizmo);
-	ClassDB::bind_method(D_METHOD("get_gizmos"), &Node3D::get_gizmos_bind);
-	ClassDB::bind_method(D_METHOD("clear_gizmos"), &Node3D::clear_gizmos);
-	ClassDB::bind_method(D_METHOD("set_subgizmo_selection", "gizmo", "id", "transform"), &Node3D::set_subgizmo_selection);
-	ClassDB::bind_method(D_METHOD("clear_subgizmo_selection"), &Node3D::clear_subgizmo_selection);
+	SUBCASE("[Node3D] Test get_world_3d") {
+	}
 
-	ClassDB::bind_method(D_METHOD("set_visible", "visible"), &Node3D::set_visible);
-	ClassDB::bind_method(D_METHOD("is_visible"), &Node3D::is_visible);
-	ClassDB::bind_method(D_METHOD("is_visible_in_tree"), &Node3D::is_visible_in_tree);
-	ClassDB::bind_method(D_METHOD("show"), &Node3D::show);
-	ClassDB::bind_method(D_METHOD("hide"), &Node3D::hide);
+	SUBCASE("[Node3D] Test force_update_transform") {
+	}
 
-	ClassDB::bind_method(D_METHOD("set_notify_local_transform", "enable"), &Node3D::set_notify_local_transform);
-	ClassDB::bind_method(D_METHOD("is_local_transform_notification_enabled"), &Node3D::is_local_transform_notification_enabled);
+	SUBCASE("[Node3D] Test get/set visibility_parent") {
+		ClassDB::bind_method(D_METHOD("set_visibility_parent", "path"), &Node3D::set_visibility_parent);
+		ClassDB::bind_method(D_METHOD("get_visibility_parent"), &Node3D::get_visibility_parent);
+	}
 
-	ClassDB::bind_method(D_METHOD("set_notify_transform", "enable"), &Node3D::set_notify_transform);
-	ClassDB::bind_method(D_METHOD("is_transform_notification_enabled"), &Node3D::is_transform_notification_enabled);
+	SUBCASE("[Node3D] Test gizmos") {
+		ClassDB::bind_method(D_METHOD("update_gizmos"), &Node3D::update_gizmos);
+		ClassDB::bind_method(D_METHOD("add_gizmo", "gizmo"), &Node3D::add_gizmo);
+		ClassDB::bind_method(D_METHOD("get_gizmos"), &Node3D::get_gizmos_bind);
+		ClassDB::bind_method(D_METHOD("clear_gizmos"), &Node3D::clear_gizmos);
+		ClassDB::bind_method(D_METHOD("set_subgizmo_selection", "gizmo", "id", "transform"), &Node3D::set_subgizmo_selection);
+		ClassDB::bind_method(D_METHOD("clear_subgizmo_selection"), &Node3D::clear_subgizmo_selection);
+	}
+
+	SUBCASE("[Node3D] Test get/set visibility") {
+		ClassDB::bind_method(D_METHOD("set_visible", "visible"), &Node3D::set_visible);
+		ClassDB::bind_method(D_METHOD("is_visible"), &Node3D::is_visible);
+		ClassDB::bind_method(D_METHOD("is_visible_in_tree"), &Node3D::is_visible_in_tree);
+		ClassDB::bind_method(D_METHOD("show"), &Node3D::show);
+		ClassDB::bind_method(D_METHOD("hide"), &Node3D::hide);
+	}
+
+	SUBCASE("[Node3D] Test notification") {
+		ClassDB::bind_method(D_METHOD("set_notify_local_transform", "enable"), &Node3D::set_notify_local_transform);
+		ClassDB::bind_method(D_METHOD("is_local_transform_notification_enabled"), &Node3D::is_local_transform_notification_enabled);
+
+		ClassDB::bind_method(D_METHOD("set_notify_transform", "enable"), &Node3D::set_notify_transform);
+		ClassDB::bind_method(D_METHOD("is_transform_notification_enabled"), &Node3D::is_transform_notification_enabled);
+	}
 }
 
 TEST_CASE("[SceneTree][Node3D] Test Transformation utility methods") {
