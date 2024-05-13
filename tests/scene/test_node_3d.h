@@ -43,38 +43,67 @@ TEST_CASE("[SceneTree][Node3D] Test Transform Getters and Setters") {
 
 	SceneTree::get_singleton()->get_root()->add_child(test_node);
 
-	test_node->set_position(Vector3(1, 5, 10));
-	test_node->set_rotation(Vector3(Math::deg_to_rad(30.0), 0, 0));
-	test_node->set_scale(Vector3(1, 1, 1));
-
 	SUBCASE("[Node3D] Test set/get transform") {
-		ClassDB::bind_method(D_METHOD("set_transform", "local"), &Node3D::set_transform);
-		ClassDB::bind_method(D_METHOD("get_transform"), &Node3D::get_transform);
+		Transform3D test_transform;
+
+		test_transform.set_origin(Vector3(5, 2, 10));
+		test_transform.rotate(Vector3(1, 0, 0), Math::deg_to_rad(30.0));
+		test_transform.scale(Vector3(2, 2.5, 5));
+
+		test_node->set_transform(test_transform);
+		CHECK(test_node->get_transform().is_equal_approx(test_transform));
 	}
 
 	SUBCASE("[Node3D] Test set/get position") {
-		ClassDB::bind_method(D_METHOD("set_position", "position"), &Node3D::set_position);
-		ClassDB::bind_method(D_METHOD("get_position"), &Node3D::get_position);
+		test_node->set_position(Vector3(20, -2.5, 10.3));
+		CHECK(test_node->get_position().is_equal_approx(Vector3(20, -2.5, 10.3)));
 	}
 
 	SUBCASE("[Node3D] Test set/get rotation") {
-		ClassDB::bind_method(D_METHOD("set_rotation", "euler_radians"), &Node3D::set_rotation);
-		ClassDB::bind_method(D_METHOD("get_rotation"), &Node3D::get_rotation);
+		Vector3 test_rotation = Vector3(
+				Math::deg_to_rad(30.0),
+				Math::deg_to_rad(60.0),
+				Math::deg_to_rad(90.0));
+
+		test_node->set_rotation(test_rotation);
+		CHECK(test_node->get_rotation().is_equal_approx(test_rotation));
 	}
 
 	SUBCASE("[Node3D] Test set/get rotation degrees") {
-		ClassDB::bind_method(D_METHOD("set_rotation_degrees", "euler_degrees"), &Node3D::set_rotation_degrees);
-		ClassDB::bind_method(D_METHOD("get_rotation_degrees"), &Node3D::get_rotation_degrees);
+		Vector3 test_rotation_deg = Vector3(-30, 30, 60);
+
+		test_node->set_rotation(test_rotation_deg);
+		CHECK(test_node->get_rotation().is_equal_approx(test_rotation_deg));
 	}
 
 	SUBCASE("[Node3D] Test set/get rotation order") {
-		ClassDB::bind_method(D_METHOD("set_rotation_order", "order"), &Node3D::set_rotation_order);
-		ClassDB::bind_method(D_METHOD("get_rotation_order"), &Node3D::get_rotation_order);
+		// check default
+		CHECK(test_node->get_rotation_order() == EulerOrder::YXZ);
+
+		test_node->set_rotation_order(EulerOrder::XZY);
+		CHECK(test_node->get_rotation_order() == EulerOrder::XZY);
+
+		test_node->set_rotation_order(EulerOrder::YXZ);
+		CHECK(test_node->get_rotation_order() == EulerOrder::YXZ);
+
+		test_node->set_rotation_order(EulerOrder::YZX);
+		CHECK(test_node->get_rotation_order() == EulerOrder::YZX);
+
+		test_node->set_rotation_order(EulerOrder::ZXY);
+		CHECK(test_node->get_rotation_order() == EulerOrder::ZXY);
+
+		test_node->set_rotation_order(EulerOrder::ZYX);
+		CHECK(test_node->get_rotation_order() == EulerOrder::ZYX);
 	}
 
 	SUBCASE("[Node3D] Test set/get rotation edit mode") {
-		ClassDB::bind_method(D_METHOD("set_rotation_edit_mode", "edit_mode"), &Node3D::set_rotation_edit_mode);
-		ClassDB::bind_method(D_METHOD("get_rotation_edit_mode"), &Node3D::get_rotation_edit_mode);
+		CHECK(test_node->get_rotation_edit_mode() == Node3D::RotationEditMode::ROTATION_EDIT_MODE_EULER);
+
+		test_node->set_rotation_edit_mode(Node3D::RotationEditMode::ROTATION_EDIT_MODE_QUATERNION);
+		CHECK(test_node->get_rotation_edit_mode() == Node3D::RotationEditMode::ROTATION_EDIT_MODE_QUATERNION);
+
+		test_node->set_rotation_edit_mode(Node3D::RotationEditMode::ROTATION_EDIT_MODE_QUATERNION);
+		CHECK(test_node->get_rotation_edit_mode() == Node3D::RotationEditMode::ROTATION_EDIT_MODE_BASIS);
 	}
 
 	SUBCASE("[Node3D] Test set/get scale") {
